@@ -17,32 +17,40 @@ class AuthenticationService {
               },
               body: JSON.stringify({
                   method: 'email',
-                  email: 'athmangude@gmail.com',
-                  password: 'secretword'
+                  email: credentials.email,
+                  password: credentials.password
               })
           }).then((response) => {
-              if(response.status === true) {
-                  return response;
-              } else {
-                  throw {
-                      badCredentials: response.status === false
-                  }
-              }
+              return response;
           }).then((response) => {
               return response.json();
           }).then((responseData) => {
             //   Store the user credentials for future login
-            AsyncStorage.multiSet([
-                ['authEmail', email],
-                ['authPassword', password],
-                ['authUserName', responseData.user.shopper_fname]
-            ], (error) => {
-                if (error) {
-                    throw error;
+
+            console.log(responseData);
+
+            if(responseData.status === false) {
+                console.log("throwing bad credentials");
+                throw {
+                    badCredentials: responseData.status === false
                 }
-                return callback({loggedIn: true});
-            });
+            } else {
+                console.log('setting asyncstorage');
+                AsyncStorage.multiSet([
+                    ['authEmail', email],
+                    ['authPassword', password],
+                    ['authUserName', responseData.user.shopper_fname]
+                ], (error) => {
+                    if (error) {
+                        console.log("error saving into asyncstorage");
+                        throw error;
+                    }
+                    return callback({loggedIn: true});
+                });
+            }
           }).catch((error) => {
+              console.log("caught thrown error");
+              console.log(error);
               callback(error);
           });
 

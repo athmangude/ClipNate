@@ -25,6 +25,15 @@ class Login extends Component {
     }
 
     render() {
+
+        var errorMessage = <View />
+
+        if (!this.state.loggedIn && this.state.badCredentials) {
+            errorMessage = <Text style={styles.error}>
+                Invalid email and password combination
+            </Text>
+        }
+
         return (
             <View style={styles.container}>
 
@@ -56,6 +65,8 @@ class Login extends Component {
                     <Text style={styles.buttonText}>Login</Text>
                 </TouchableHighlight>
 
+                {errorMessage}
+
                 <ActivityIndicatorIOS
                     animating={this.state.showProgress}
                     size="large"
@@ -73,14 +84,25 @@ class Login extends Component {
 
         // Initiate login process
         var authenticationService = require('./AuthenticationService');
+
+        console.log(this.state.email, this.state.password);
+
         authenticationService.login({
             email: this.state.email,
             password: this.state.password
         }, (results) => {
+            console.log(this.state);
             this.setState(Object.assign({
                 showProgress: false
             }, results));
-        })
+
+            console.log(this.state);
+
+            if (results.loggedIn && this.props.onLogin) {
+                this.props.onLogin();
+            }
+
+        });
     }
 
 }
@@ -131,6 +153,11 @@ var styles = StyleSheet.create({
 
     loader: {
         marginTop: 30
+    },
+
+    error: {
+        color: 'red',
+        paddingTop: 10
     }
 })
 
