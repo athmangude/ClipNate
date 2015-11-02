@@ -27,6 +27,11 @@ class Login extends Component {
     render() {
         return (
             <View style={styles.container}>
+
+                <Image
+                    source={require('image!clipit_logo')}
+                    style={styles.image} />
+
                 <Text style={styles.title}>
                     ClipNate
                 </Text>
@@ -78,6 +83,11 @@ var styles = StyleSheet.create({
         padding: 10
     },
 
+    logo: {
+        height: 120,
+        height: 120
+    },
+
     title: {
         fontSize: 20,
         marginBottom: 20
@@ -88,11 +98,11 @@ var styles = StyleSheet.create({
         borderWidth: 1,
         padding: 10,
         marginTop: 10,
-        borderColor: '48BBEC'
+        borderColor: 'FF890D'
     },
 
     button: {
-        backgroundColor: '48BBEC',
+        backgroundColor: 'FF890D',
         height: 50,
         marginTop: 20,
         alignSelf: 'stretch',
