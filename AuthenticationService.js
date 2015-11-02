@@ -1,4 +1,4 @@
-'use strict';
+// 'use strict'
 
 var AsyncStorage = require('react-native').AsyncStorage;
 
@@ -19,32 +19,39 @@ class AuthenticationService {
                   method: 'email',
                   email: 'athmangude@gmail.com',
                   password: 'secretword'
-              }).then((response) => {
-                  if(response.status === true) {
-                      return response;
-                  } else {
-                      throw {
-                          badCredentials: response.status === false
-                      }
+              })
+          }).then((response) => {
+              if(response.status === true) {
+                  return response;
+              } else {
+                  throw {
+                      badCredentials: response.status === false
                   }
-              }).then((response) => return response.json).then((responseData) => {
-                //   Store the user credentials for future login
-                AsyncStorage.multiSet([
-                    ['authEmail', email],
-                    ['authPassword', password]
-                ], (error) => {
-                    if (error) {
-                        throw error;
-                    }
-                    return callback({loggedIn: true});
-                });
-              }).catch((error) => {
-                  callback(error);
-              });
-        });
+              }
+          }).then((response) => {
+              return response.json();
+          }).then((responseData) => {
+            //   Store the user credentials for future login
+            AsyncStorage.multiSet([
+                ['authEmail', email],
+                ['authPassword', password],
+                ['authUserName', responseData.user.shopper_fname]
+            ], (error) => {
+                if (error) {
+                    throw error;
+                }
+                return callback({loggedIn: true});
+            });
+          }).catch((error) => {
+              callback(error);
+          });
 
+    }
+
+    logup(credentials, callback) {
+        return callback({loggedIn: true})
     }
 
 }
 
-module.exports = AuthenticationService;
+module.exports = new AuthenticationService();

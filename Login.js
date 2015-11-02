@@ -68,8 +68,19 @@ class Login extends Component {
 
     onLoginPressed() {
         // show activity indicator
-        // initiate login process
+        // use email and password to initiate login process
         this.setState({showProgress: true});
+
+        // Initiate login process
+        var authenticationService = require('./AuthenticationService');
+        authenticationService.login({
+            email: this.state.email,
+            password: this.state.password
+        }, (results) => {
+            this.setState(Object.assign({
+                showProgress: false
+            }, results));
+        })
     }
 
 }
