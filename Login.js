@@ -76,7 +76,7 @@ class Login extends Component {
 
 var styles = StyleSheet.create({
     container: {
-        backgroundColor: 'F5FCFF',
+        backgroundColor: 'FFF8ED',
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
@@ -98,7 +98,8 @@ var styles = StyleSheet.create({
         borderWidth: 1,
         padding: 10,
         marginTop: 10,
-        borderColor: 'FF890D'
+        borderColor: 'FF890D',
+        backgroundColor: 'white'
     },
 
     button: {
