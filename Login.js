@@ -39,7 +39,7 @@ class Login extends Component {
 
                 <Image
                     source={require('image!clipit_logo')}
-                    style={styles.image} />
+                    style={styles.logo} />
 
                 <Text style={styles.title}>
                     ClipNate
@@ -118,8 +118,9 @@ var styles = StyleSheet.create({
     },
 
     logo: {
-        height: 120,
-        height: 120
+        height: 240,
+        height: 180,
+        borderRadius: 90
     },
 
     title: {

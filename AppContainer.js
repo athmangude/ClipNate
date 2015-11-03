@@ -7,7 +7,8 @@ var {
     Text,
     Image,
     Component,
-    StyleSheet
+    StyleSheet,
+    TabBarIOS
 } = React;
 
 class AppContainer extends Component {
@@ -15,15 +16,30 @@ class AppContainer extends Component {
         super(props);
 
         this.state = {
-
+            selectedTab: "all_deals"
         }
     }
 
     render() {
         return (
-            <View style={styles.container}>
-                <Text style={styles.welcome}>This is the app container</Text>
-            </View>
+            <TabBarIOS style={styles.container}>
+                <TabBarIOS.Item
+                    title="All Deals"
+                    selected={this.state.selectedTab == "all_deals"}
+                    icon={require('image!inbox')}
+                    onPress={() => this.setState({selectedTab: 'all_deals'})}
+                >
+                    <Text style={styles.welcome}>Feed</Text>
+                </TabBarIOS.Item>
+                <TabBarIOS.Item
+                    title="Around Me"
+                    selected={this.state.selectedTab == "around_me"}
+                    icon={require('image!search')}
+                    onPress={() => this.setState({selectedTab: 'around_me'})}
+                >
+                    <Text style={styles.welcome}>Around Me</Text>
+                </TabBarIOS.Item>
+            </TabBarIOS>
         )
     }
 }
