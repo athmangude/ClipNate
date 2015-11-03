@@ -98,6 +98,7 @@ class Login extends Component {
 
             console.log(this.state);
 
+            // call function to handle successful login if available
             if (results.loggedIn && this.props.onLogin) {
                 this.props.onLogin();
             }
@@ -142,7 +143,8 @@ var styles = StyleSheet.create({
         height: 50,
         marginTop: 20,
         alignSelf: 'stretch',
-        justifyContent: 'center'
+        justifyContent: 'center',
+        borderRadius: 5
     },
 
     buttonText: {

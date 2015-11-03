@@ -12,11 +12,36 @@ var {
 var Login = require('./Login');
 
 var ClipNate = React.createClass({
-  render: function() {
-    return (
-      <Login />
-    );
-  }
+    render: function() {
+
+        if (this.state.isLoggedIn) {
+            return (
+                <View style={styles.container}>
+                    <Text style={styles.welcome}>Logged In</Text>
+                </View>
+            )
+        } else {
+            return (
+              <Login onLogin={this.onLogin}/>
+            );
+        }
+
+    },
+
+    getInitialState: function(){
+        return({
+            isLoggedIn: false
+        });
+    },
+
+    onLogin: function() {
+        this.setState({
+            isLoggedIn: true
+        })
+    }
+
+
+
 });
 
 var styles = StyleSheet.create({

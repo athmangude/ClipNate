@@ -26,11 +26,7 @@ class AuthenticationService {
               return response.json();
           }).then((responseData) => {
             //   Store the user credentials for future login
-
-            console.log(responseData);
-
             if(responseData.status === false) {
-                console.log("throwing bad credentials");
                 throw {
                     badCredentials: responseData.status === false
                 }
@@ -42,15 +38,12 @@ class AuthenticationService {
                     ['authUserName', responseData.user.shopper_fname]
                 ], (error) => {
                     if (error) {
-                        console.log("error saving into asyncstorage");
                         throw error;
                     }
                     return callback({loggedIn: true});
                 });
             }
           }).catch((error) => {
-              console.log("caught thrown error");
-              console.log(error);
               callback(error);
           });
 
