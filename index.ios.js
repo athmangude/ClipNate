@@ -12,6 +12,7 @@ var {
 // Bring in the login Module
 var Login = require('./Login');
 var AuthenticationService = require('./AuthenticationService');
+var AppContainer = require('./AppContainer');
 
 var ClipNate = React.createClass({
     componentDidMount: function() {
@@ -38,9 +39,7 @@ var ClipNate = React.createClass({
 
         if (this.state.isLoggedIn) {
             return (
-                <View style={styles.container}>
-                    <Text style={styles.welcome}>Logged In</Text>
-                </View>
+                <AppContainer />
             )
         } else {
             return (
