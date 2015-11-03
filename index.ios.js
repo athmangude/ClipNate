@@ -6,13 +6,35 @@ var {
   StyleSheet,
   Text,
   View,
+  ActivityIndicatorIOS
 } = React;
 
 // Bring in the login Module
 var Login = require('./Login');
+var AuthenticationService = require('./AuthenticationService');
 
 var ClipNate = React.createClass({
+    componentDidMount: function() {
+        AuthenticationService.getAuthenticationInfo((error, authInfo) => {
+            this.setState({
+                checkingAuth: false,
+                isLoggedIn: authInfo != null
+            });
+        });
+    },
+
     render: function() {
+
+        if (this.state.checkingAuth) {
+            return (
+                <View style={styles.container}>
+                    <ActivityIndicatorIOS
+                        style={styles.loader}
+                        size="large"
+                        animating="true" />
+                </View>
+            )
+        }
 
         if (this.state.isLoggedIn) {
             return (
@@ -30,7 +52,8 @@ var ClipNate = React.createClass({
 
     getInitialState: function(){
         return({
-            isLoggedIn: false
+            isLoggedIn: false,
+            checkingAuth: true
         });
     },
 
@@ -39,9 +62,6 @@ var ClipNate = React.createClass({
             isLoggedIn: true
         })
     }
-
-
-
 });
 
 var styles = StyleSheet.create({

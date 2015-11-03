@@ -1,8 +1,35 @@
 // 'use strict'
 
 var AsyncStorage = require('react-native').AsyncStorage;
+var _ = require('lodash');
 
 class AuthenticationService {
+
+    getAuthenticationInfo(callback) {
+        AsyncStorage.multiGet(['authEmail', 'authPassword', 'authUserName'], (error, result) => {
+            if (error) {
+                return callback(error)
+            }
+
+            if (!result) {
+                callback();
+            }
+
+            var zippedObject = _.zipObject(result);
+
+            if (!zippedObject['authEmail']) {
+                return callback();
+            }
+
+            var authenticationInfo = {
+                authEmail: zippedObject['authEmail'],
+                authPassword: zippedObject['authPassword'],
+                authUserName: zippedObject['authPassword']
+            }
+
+            return callback(null, authenticationInfo);
+        });
+    }
 
     login(credentials, callback) {
 
