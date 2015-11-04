@@ -8,7 +8,8 @@ var {
     Component,
     Text,
     View,
-    ListView
+    ListView,
+    ActivityIndicatorIOS
 } = React;
 
 class Feed extends Component {
@@ -20,7 +21,8 @@ class Feed extends Component {
         });
 
         this.state = {
-            dataSource: dataSource.cloneWithRows([])
+            dataSource: dataSource.cloneWithRows([]),
+            showProgress: true
         };
     }
 
@@ -32,10 +34,12 @@ class Feed extends Component {
         fetch('http://apitest.shopnate.com.au/stores/resources')
         .then((response) => response.json())
         .then((responseData) => {
-            console.log(responseData);
+            console.log(responseData.retail_stores);
             this.setState({
-                dataSource: this.state.dataSource.cloneWithRows(responseData.retail_stores)
+                dataSource: this.state.dataSource.cloneWithRows(responseData.retail_stores),
+                showProgress: false
             });
+            console.log(responseData.retail_stores)
         });
     }
 
@@ -50,6 +54,22 @@ class Feed extends Component {
     }
 
     render() {
+
+        if(this.state.showProgress) {
+            return (
+                <View style={{
+                    flex: 1,
+                    justifyContent: 'center'
+                }}>
+                    <ActivityIndicatorIOS style={{
+                        alignSelf: 'center'
+                    }}
+                        size="large"
+                        animating={true} />
+                </View>
+            );
+        }
+
         return (
             <View style={{
                 flex: 1,
