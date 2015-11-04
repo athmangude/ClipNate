@@ -156,12 +156,12 @@ var styles = StyleSheet.create({
         borderWidth: 1,
         padding: 10,
         marginTop: 10,
-        borderColor: 'FF890D',
+        borderColor: '#FF890D',
         backgroundColor: 'white'
     },
 
     button: {
-        backgroundColor: 'FF890D',
+        backgroundColor: '#FF890D',
         height: 50,
         marginTop: 20,
         alignSelf: 'stretch',

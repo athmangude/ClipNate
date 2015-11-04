@@ -29,18 +29,38 @@ class PushPayload extends Component {
         return (
             <View style={{
                 flex: 1,
-                paddingTop: 80,
+                paddingTop: 65,
                 justifyContent: 'flex-start',
-                alignItems: 'center'
+                // alignItems: 'center'
             }}>
                 <Image
                     source={{uri: this.state.pushEvent.avatar_url}}
                     style={{
                         height: 300,
-                        borderRadius: 5,
                         alignSelf: 'stretch'
                     }}
                 />
+
+                <Text
+                    style={{
+                        color: 'white',
+                        backgroundColor: '#FF890D',
+                        marginTop: -20,
+                        alignSelf: 'flex-start',
+                        marginLeft: 3
+                    }}>{this.state.pushEvent.merchant_name}</Text>
+                <Text style={{
+                    color: 'white',
+                    backgroundColor: 'black',
+                    alignSelf: 'flex-end',
+                    marginTop: -17,
+                    marginRight: 3
+                }}>Save {this.state.pushEvent.commission_rate}{this.state.pushEvent.commission_description}</Text>
+                <Text style={{
+                    marginTop: 30,
+                    marginRight: 5,
+                    marginLeft: 5
+                }}>{this.state.pushEvent.summary}</Text>
             </View>
         );
     }
