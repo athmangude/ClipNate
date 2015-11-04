@@ -77,7 +77,6 @@ class AuthenticationService {
                     badCredentials: responseData.status === false
                 }
             } else {
-                console.log('setting asyncstorage');
                 AsyncStorage.multiSet([
                     ['authEmail', email],
                     ['authPassword', password],

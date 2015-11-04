@@ -1,5 +1,6 @@
 'use strict';
 
+// require dependencies
 var React = require('react-native');
 
 var {
@@ -13,6 +14,10 @@ var {
 
 var Feed = require('./Feed');
 
+/**
+ * holds layout and view components that display the app in the desired manner
+ * @class AppContainer
+ */
 class AppContainer extends Component {
     constructor(props) {
         super(props);
@@ -22,6 +27,11 @@ class AppContainer extends Component {
         }
     }
 
+    /**
+     * default render function for react component
+     * @method render
+     * @return {components} [a tree of components]
+     */
     render() {
         return (
             <TabBarIOS style={styles.container}>
@@ -46,6 +56,7 @@ class AppContainer extends Component {
     }
 }
 
+// stylesheet used by this component
 var styles = StyleSheet.create({
     container: {
         flex: 1,
@@ -59,4 +70,5 @@ var styles = StyleSheet.create({
         margin: 10,
     }
 });
+
 module.exports = AppContainer;

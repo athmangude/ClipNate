@@ -10,7 +10,8 @@ var {
     View,
     ListView,
     ActivityIndicatorIOS,
-    Image
+    Image,
+    TouchableHighlight
 } = React;
 
 /**
@@ -56,6 +57,10 @@ class Feed extends Component {
         });
     }
 
+    pressRow(rowData) {
+        console.log(rowData);
+    }
+
     /**
      * [renderRow description]
      * @method renderRow
@@ -64,31 +69,36 @@ class Feed extends Component {
      */
     renderRow(rowData) {
         return (
-            <View style={{
-                flex: 1,
-                flexDirection: 'row',
-                padding: 20,
-                alignItems: 'center',
-                borderColor: '#D7D7D7',
-                borderBottomWidth: 1
-            }}>
-                <Image
-                    source={{uri: rowData.avatar_url}}
-                    style={{
-                        height: 100,
-                        width: 100,
-                        borderRadius: 5
-                    }}
-                />
+            <TouchableHighlight
+                onPress={() => this.pressRow(rowData)}
+                underlayColor="#DDD"
+            >
                 <View style={{
-                    paddingLeft: 20
+                    flex: 1,
+                    flexDirection: 'row',
+                    padding: 20,
+                    alignItems: 'center',
+                    borderColor: '#D7D7D7',
+                    borderBottomWidth: 1
                 }}>
-                    <Text style={{fontWeight: 'bold'}}>{rowData.merchant_name}</Text>
-                    <Text>{rowData.category}</Text>
-                    <Text>Save {rowData.commission_rate}{rowData.commission_description}</Text>
-                    <Text></Text>
+                    <Image
+                        source={{uri: rowData.avatar_url}}
+                        style={{
+                            height: 100,
+                            width: 100,
+                            borderRadius: 5
+                        }}
+                    />
+                    <View style={{
+                        paddingLeft: 20
+                    }}>
+                        <Text style={{fontWeight: 'bold'}}>{rowData.merchant_name}</Text>
+                        <Text>{rowData.category}</Text>
+                        <Text>Save {rowData.commission_rate}{rowData.commission_description}</Text>
+                        <Text></Text>
+                    </View>
                 </View>
-            </View>
+            </TouchableHighlight>
         );
     }
 
