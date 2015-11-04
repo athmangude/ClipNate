@@ -14,7 +14,16 @@ var Login = require('./Login');
 var AuthenticationService = require('./AuthenticationService');
 var AppContainer = require('./AppContainer');
 
+/**
+ * The main app component
+ * @class ClipNate
+ */
 var ClipNate = React.createClass({
+
+    /**
+     * Run this function to do things after the component has been rendered on the UI
+     * @method componentDidMount
+     */
     componentDidMount: function() {
         AuthenticationService.getAuthenticationInfo((error, authInfo) => {
             this.setState({
@@ -24,6 +33,11 @@ var ClipNate = React.createClass({
         });
     },
 
+    /**
+     * default render method for React component
+     * @method function
+     * @return {components} [a tree of component to be displayed depending on the current state]
+     */
     render: function() {
 
         if (this.state.checkingAuth) {
@@ -49,6 +63,11 @@ var ClipNate = React.createClass({
 
     },
 
+    /**
+     * set default states for components
+     * @method getInitialState
+     * @return {object} object of default states
+     */
     getInitialState: function(){
         return({
             isLoggedIn: false,
@@ -56,6 +75,10 @@ var ClipNate = React.createClass({
         });
     },
 
+    /**
+     * handles what happens after the user has logged in
+     * @method onLogin
+     */
     onLogin: function() {
         this.setState({
             isLoggedIn: true
@@ -63,6 +86,9 @@ var ClipNate = React.createClass({
     }
 });
 
+/**
+ * styles used by this Component
+ */
 var styles = StyleSheet.create({
   container: {
     flex: 1,

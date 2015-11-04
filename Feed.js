@@ -13,6 +13,10 @@ var {
     Image
 } = React;
 
+/**
+ * Handles fetching of deals from the api and displaying them
+ * @class Feed
+ */
 class Feed extends Component {
     constructor(props) {
         super(props);
@@ -22,15 +26,23 @@ class Feed extends Component {
         });
 
         this.state = {
-            dataSource: dataSource.cloneWithRows([]),
-            showProgress: true
+            dataSource: dataSource.cloneWithRows([]), // declaring the dataset
+            showProgress: true // show the activity indicator?
         };
     }
 
+    /**
+     * run this function to do something after the component has successfully been mounted on the UI
+     * @method componentDidMount
+     */
     componentDidMount() {
         this.fetchFeed();
     }
 
+    /**
+     * fetch deals from the Shopnate API
+     * @method fetchFeed
+     */
     fetchFeed() {
         fetch('http://apitest.shopnate.com.au/stores/resources')
         .then((response) => response.json())
@@ -44,6 +56,12 @@ class Feed extends Component {
         });
     }
 
+    /**
+     * [renderRow description]
+     * @method renderRow
+     * @param  {object}  rowData [render a deal given its data]
+     * @return {components}          [a tree of components to display the deal as desired]
+     */
     renderRow(rowData) {
         return (
             <View style={{
@@ -74,6 +92,11 @@ class Feed extends Component {
         );
     }
 
+    /**
+     * default render method for a component
+     * @method render
+     * @return {[components]} [a tree of components depending on the state]
+     */
     render() {
 
         if(this.state.showProgress) {

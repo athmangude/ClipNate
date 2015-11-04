@@ -1,10 +1,21 @@
-// 'use strict'
+'use strict'
 
+// require dependencies
 var AsyncStorage = require('react-native').AsyncStorage;
 var _ = require('lodash');
 
+/**
+ * Handles all authentication with server
+ * @class AuthenticationService
+ */
 class AuthenticationService {
 
+    /**
+     * get the saved authentication info on device
+     * @method getAuthenticationInfo
+     * @param  {function}            callback function that is executed once the authentication info has been fetched
+     * @return {Function}                       the callback function passed to the function
+     */
     getAuthenticationInfo(callback) {
         AsyncStorage.multiGet(['authEmail', 'authPassword', 'authUserName'], (error, result) => {
             if (error) {
@@ -15,6 +26,7 @@ class AuthenticationService {
                 callback();
             }
 
+            // create object from associative array of authentication info
             var zippedObject = _.zipObject(result);
 
             if (!zippedObject['authEmail']) {
@@ -31,6 +43,13 @@ class AuthenticationService {
         });
     }
 
+    /**
+     * verify user provided credentials and log the user in
+     * @method login
+     * @param  {Object}   credentials [an object containing the user's credentials]
+     * @param  {Function} callback    [a callback function to be called once the user is signed in]
+     * @return {Function}               [the callback function passed to the function]
+     */
     login(credentials, callback) {
 
         var email = credentials.email;
@@ -74,10 +93,6 @@ class AuthenticationService {
               callback(error);
           });
 
-    }
-
-    logup(credentials, callback) {
-        return callback({loggedIn: true})
     }
 
 }

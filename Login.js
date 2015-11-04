@@ -15,7 +15,16 @@ var {
     ActivityIndicatorIOS
 } = React;
 
+/**
+ * displays the login screen and what happens during the login process
+ * @class Login
+ */
 class Login extends Component {
+    /**
+     * this function must run every time the class is initialized
+     * @method constructor
+     * @param  {props}    props default parameter for class initialization
+     */
     constructor(props) {
         super(props);
 
@@ -24,6 +33,10 @@ class Login extends Component {
         }
     }
 
+    /**
+     * defaulr render method for React Component
+     * @method render
+     */
     render() {
 
         var errorMessage = <View />
@@ -77,6 +90,10 @@ class Login extends Component {
         );
     }
 
+    /**
+     * handle the press event of the login button
+     * @method onLoginPressed
+     */
     onLoginPressed() {
         // show activity indicator
         // use email and password to initiate login process
@@ -108,6 +125,10 @@ class Login extends Component {
 
 }
 
+/**
+ * stylesheet used by this module
+ * @type {StyleSheet}
+ */
 var styles = StyleSheet.create({
     container: {
         backgroundColor: '#FFF8ED',
@@ -151,7 +172,7 @@ var styles = StyleSheet.create({
     buttonText: {
         alignSelf: 'center',
         fontSize: 22,
-        color: 'FFF'
+        color: '#FFF'
     },
 
     loader: {
