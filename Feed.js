@@ -14,6 +14,8 @@ var {
     TouchableHighlight
 } = React;
 
+var PushPayload = require('./PushPayload');
+
 /**
  * Handles fetching of deals from the api and displaying them
  * @class Feed
@@ -58,7 +60,13 @@ class Feed extends Component {
     }
 
     pressRow(rowData) {
-        console.log(rowData);
+        this.props.navigator.push({
+            title: "Deal",
+            component: PushPayload,
+            passProps: {
+                pushEvent: rowData
+            }
+        })
     }
 
     /**

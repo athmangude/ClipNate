@@ -15,13 +15,13 @@ class PushPayload extends Component {
     constructor(props){
         super(props);
 
-        var dataSource = new ListView.dataSource({
-            rowHasChanged: (r1, r2) => r1 != r2;
+        var dataSource = new ListView.DataSource({
+            rowHasChanged: (r1, r2) => r1 != r2
         });
 
-        this.state({
+        this.state = {
             dataSource: dataSource
-        });
+        };
     }
 
     render() {
