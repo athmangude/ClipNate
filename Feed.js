@@ -20,8 +20,23 @@ class Feed extends Component {
         });
 
         this.state = {
-            dataSource: dataSource.cloneWithRows(['A', 'B', 'C'])
+            dataSource: dataSource.cloneWithRows([])
         };
+    }
+
+    componentDidMount() {
+        this.fetchFeed();
+    }
+
+    fetchFeed() {
+        fetch('http://apitest.shopnate.com.au/stores/resources')
+        .then((response) => response.json())
+        .then((responseData) => {
+            console.log(responseData);
+            this.setState({
+                dataSource: this.state.dataSource.cloneWithRows(responseData.retail_stores)
+            });
+        });
     }
 
     renderRow(rowData) {
@@ -30,7 +45,7 @@ class Feed extends Component {
                 backgroundColor: '#FFF',
                 alignSelf: 'center'
             }}>
-                {rowData}
+                {rowData.merchant_name}
             </Text>
     }
 

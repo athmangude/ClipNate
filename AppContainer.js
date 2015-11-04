@@ -38,7 +38,6 @@ class AppContainer extends Component {
                     selected={this.state.selectedTab == "around_me"}
                     icon={require('image!search')}
                     onPress={() => this.setState({selectedTab: 'around_me'})}
-                    style={styles.tabBarItem}
                 >
                     <Text style={styles.welcome}>Around Me</Text>
                 </TabBarIOS.Item>
@@ -58,9 +57,6 @@ var styles = StyleSheet.create({
         fontSize: 20,
         textAlign: 'center',
         margin: 10,
-    },
-    tabBarItem: {
-        color: 'FF6137'
     }
 });
 module.exports = AppContainer;
