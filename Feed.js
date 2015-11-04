@@ -127,7 +127,8 @@ class Feed extends Component {
         return (
             <View style={{
                 flex: 1,
-                justifyContent: 'flex-start'
+                justifyContent: 'flex-start',
+                marginTop: 60
             }}
             >
                 <ListView

@@ -9,7 +9,8 @@ var {
     Image,
     Component,
     StyleSheet,
-    TabBarIOS
+    TabBarIOS,
+    NavigatorIOS
 } = React;
 
 var Feed = require('./Feed');
@@ -41,7 +42,14 @@ class AppContainer extends Component {
                     icon={require('image!inbox')}
                     onPress={() => this.setState({selectedTab: 'all_deals'})}
                 >
-                    <Feed />
+                    <NavigatorIOS
+                        style={{
+                            flex: 1
+                        }}
+                        initialRoute={{
+                            component: Feed,
+                            title: 'Deals'
+                        }} />
                 </TabBarIOS.Item>
                 <TabBarIOS.Item
                     title="Around Me"
