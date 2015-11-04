@@ -110,7 +110,7 @@ class Login extends Component {
 
 var styles = StyleSheet.create({
     container: {
-        backgroundColor: 'FFF8ED',
+        backgroundColor: '#FFF8ED',
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',

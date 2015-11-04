@@ -9,7 +9,8 @@ var {
     Text,
     View,
     ListView,
-    ActivityIndicatorIOS
+    ActivityIndicatorIOS,
+    Image
 } = React;
 
 class Feed extends Component {
@@ -44,13 +45,33 @@ class Feed extends Component {
     }
 
     renderRow(rowData) {
-        return <Text style={{
-                color: '#333',
-                backgroundColor: '#FFF',
-                alignSelf: 'center'
+        return (
+            <View style={{
+                flex: 1,
+                flexDirection: 'row',
+                padding: 20,
+                alignItems: 'center',
+                borderColor: '#D7D7D7',
+                borderBottomWidth: 1
             }}>
-                {rowData.merchant_name}
-            </Text>
+                <Image
+                    source={{uri: rowData.avatar_url}}
+                    style={{
+                        height: 100,
+                        width: 100,
+                        borderRadius: 5
+                    }}
+                />
+                <View style={{
+                    paddingLeft: 20
+                }}>
+                    <Text style={{fontWeight: 'bold'}}>{rowData.merchant_name}</Text>
+                    <Text>{rowData.category}</Text>
+                    <Text>Save {rowData.commission_rate}{rowData.commission_description}</Text>
+                    <Text></Text>
+                </View>
+            </View>
+        );
     }
 
     render() {
