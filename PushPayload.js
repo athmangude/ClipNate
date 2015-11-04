@@ -20,7 +20,8 @@ class PushPayload extends Component {
         });
 
         this.state = {
-            dataSource: dataSource
+            dataSource: dataSource,
+            pushEvent: props.pushEvent
         };
     }
 
@@ -28,11 +29,18 @@ class PushPayload extends Component {
         return (
             <View style={{
                 flex: 1,
-                paddingTop: 20,
+                paddingTop: 80,
                 justifyContent: 'flex-start',
                 alignItems: 'center'
             }}>
-                <Text>Single deal</Text>
+                <Image
+                    source={{uri: this.state.pushEvent.avatar_url}}
+                    style={{
+                        height: 300,
+                        borderRadius: 5,
+                        alignSelf: 'stretch'
+                    }}
+                />
             </View>
         );
     }

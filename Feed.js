@@ -60,6 +60,7 @@ class Feed extends Component {
     }
 
     pressRow(rowData) {
+        console.log(rowData);
         this.props.navigator.push({
             title: "Deal",
             component: PushPayload,
@@ -136,7 +137,7 @@ class Feed extends Component {
             <View style={{
                 flex: 1,
                 justifyContent: 'flex-start',
-                marginTop: 60
+                paddingTop: 60
             }}
             >
                 <ListView
