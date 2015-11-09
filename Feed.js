@@ -54,22 +54,31 @@ class Feed extends Component {
 
             var storesWithCoordinates = [];
 
+            var currentLocation = { latitide: -37.8152041, longitude: 144.9604138 };
             for (var store of responseData.retail_stores) {
-                // console.log(store);
+                var latitude = this.getRandomArbitrary(-37.877900, -37.773704);
+                var longitude = this.getRandomArbitrary(144.838521, 145.069492);
                 store = Object.assign({
-                    latitude: 23.4444,
-                    longitude: 1.333334
+                    latitude: latitude,
+                    longitude: longitude
                 }, store);
-                console.log(store);
+                storesWithCoordinates.push(store);
             }
 
-            console.log(responseData.retail_stores);
+            // console.log(responseData.retail_stores);
+            console.log(storesWithCoordinates)
 
             this.setState({
-                dataSource: this.state.dataSource.cloneWithRows(responseData.retail_stores),
+                dataSource: this.state.dataSource.cloneWithRows(storesWithCoordinates),
                 showProgress: false
             });
+
+
         });
+    }
+
+    getRandomArbitrary(min, max) {
+        return Math.random() * (max - min) + min;
     }
 
     pressRow(rowData) {
