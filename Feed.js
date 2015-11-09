@@ -50,12 +50,25 @@ class Feed extends Component {
         fetch('http://apitest.shopnate.com.au/stores/resources')
         .then((response) => response.json())
         .then((responseData) => {
+            // console.log(responseData.retail_stores);
+
+            var storesWithCoordinates = [];
+
+            for (var store of responseData.retail_stores) {
+                // console.log(store);
+                store = Object.assign({
+                    latitude: 23.4444,
+                    longitude: 1.333334
+                }, store);
+                console.log(store);
+            }
+
             console.log(responseData.retail_stores);
+
             this.setState({
                 dataSource: this.state.dataSource.cloneWithRows(responseData.retail_stores),
                 showProgress: false
             });
-            console.log(responseData.retail_stores)
         });
     }
 
