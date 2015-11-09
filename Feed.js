@@ -14,6 +14,7 @@ var {
     TouchableHighlight
 } = React;
 
+var Geolib = require('geolib');
 var PushPayload = require('./PushPayload');
 
 /**
@@ -54,31 +55,55 @@ class Feed extends Component {
 
             var storesWithCoordinates = [];
 
-            var currentLocation = { latitide: -37.8152041, longitude: 144.9604138 };
+            // TODO =!> Get the user's current location
+            var currentLocation = { latitude: -37.8152041, longitude: 144.9604138 };
             for (var store of responseData.retail_stores) {
-                var latitude = this.getRandomArbitrary(-37.877900, -37.773704);
-                var longitude = this.getRandomArbitrary(144.838521, 145.069492);
-                store = Object.assign({
-                    latitude: latitude,
-                    longitude: longitude
-                }, store);
+
+                // generate random locations around Melbourne
+                var storeLocation = {
+                    latitude: this.getRandomArbitrary(-37.877900, -37.773704),
+                    longitude: this.getRandomArbitrary(144.838521, 145.069492)
+                }
+
+                // calculate the distance of store from current location
+                var distance = {
+                    distance: this.getGeospartialDistance(currentLocation, storeLocation)
+                }
+
+                store = Object.assign(storeLocation, distance, store);
                 storesWithCoordinates.push(store);
             }
 
-            // console.log(responseData.retail_stores);
-            console.log(storesWithCoordinates)
+            // sort stores according to distance from user
+            var sortedCoordinatesArray = Geolib.orderByDistance(currentLocation, storesWithCoordinates);
+
+            sortedStoresByDistance = [];
+
+            for (var coordinateObj of sortedCoordinatesArray) {
+                coordinateObj = Object.assign(coordinateObj, storesWithCoordinates[parseInt(coordinateObj.key)]);
+                sortedStoresByDistance.push(coordinateObj);
+            }
+
+            console.log(sortedStoresByDistance);
 
             this.setState({
-                dataSource: this.state.dataSource.cloneWithRows(storesWithCoordinates),
+                dataSource: this.state.dataSource.cloneWithRows(sortedStoresByDistance),
                 showProgress: false
             });
-
-
         });
     }
 
     getRandomArbitrary(min, max) {
         return Math.random() * (max - min) + min;
+    }
+
+    getGeospartialDistance(start, end) {
+        // return Geolib.getDistance(start, end);
+        return Geolib.getDistance(
+            // start,
+            // {latitude: Geolib.decimal2sexagesimal(end.latitude), longitude: geolib.decimal2sexagesimal(end.longitude)}
+            start, end
+        );
     }
 
     pressRow(rowData) {
