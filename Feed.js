@@ -151,7 +151,7 @@ class Feed extends Component {
                         <Text style={{fontWeight: 'bold'}}>{rowData.merchant_name}</Text>
                         <Text>{rowData.category}</Text>
                         <Text>Save {rowData.commission_rate}{rowData.commission_description}</Text>
-                        <Text></Text>
+                        <Text>{rowData.distance < 999 ? rowData.distance + "m away" : rowData.distance/1000 + "km away" }</Text>
                     </View>
                 </View>
             </TouchableHighlight>
